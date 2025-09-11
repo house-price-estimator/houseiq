@@ -1,6 +1,6 @@
 # 🏠 HouseIQ: House Price Estimator
 
-A full-stack application to predict house prices based on property features.
+In the real estate sector, many stakeholders (agents, sellers, buyers) still rely on ad hoc spreadsheets and subjective judgement to estimate property prices. This often results in inconsistent valuations and poor decision-making. Our proposed solution, HouseIQ, is an end-to-end application designed to predict property prices based on key attributes such as number of bedrooms, bathrooms, floor area, property age, and location index. The system will provide transparent explanations for each estimate and maintain a record of valuations for audit and reporting purposes.
 
 ## 📌 Tech Stack
 - **Backend**: Java + Spring Boot
