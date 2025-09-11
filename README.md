@@ -18,7 +18,7 @@ docs/ → Documentation (SRS, feasibility, planning, diagrams)
 
 ## 🚀 Getting Started
 1. Clone this repo:  
-   \`git clone https://github.com/YOUR_USERNAME/houseiq.git\`
+   \ https://github.com/vsdigital01/houseiq.git
 2. Setup backend:  
    \`cd backend\` → \`mvn spring-boot:run\`
 3. Setup ML service:  
