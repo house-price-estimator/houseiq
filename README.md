@@ -16,16 +16,6 @@ frontend/ → React + Chakra UI frontend
 db/ → Database schema and scripts  
 docs/ → Documentation (SRS, feasibility, planning, diagrams)
 
-## 🚀 Getting Started
-1. Clone this repo:  
-   \ https://github.com/vsdigital01/houseiq.git
-2. Setup backend:  
-   \`cd backend\` → \`mvn spring-boot:run\`
-3. Setup ML service:  
-   \`cd ml-service\` → \`uvicorn main:app --reload\`
-4. Setup frontend:  
-   \`cd frontend\` → \`npm install\` → \`npm run dev\`
-
 ## 👥 Team
 - Verona Surajlall
 - Ajmal Ahmad
