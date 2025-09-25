@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # === Java / Spring Boot ===
+=======
+# Java
+>>>>>>> afdb6b7 (Add project structure, docs, README, .gitignore)
 *.class
 *.jar
 *.war
@@ -7,6 +11,7 @@ target/
 *.log
 *.iml
 .idea/
+<<<<<<< HEAD
 *.hprof
 out/
 
@@ -26,6 +31,20 @@ pip-log.txt
 *.sqlite3
 
 # === Node / React / Frontend ===
+=======
+
+# Python
+__pycache__/
+*.py[cod]
+env/
+venv/
+*.egg-info/
+dist/
+*.sqlite3
+.env
+
+# Node
+>>>>>>> afdb6b7 (Add project structure, docs, README, .gitignore)
 node_modules/
 npm-debug.log
 yarn-error.log
@@ -36,8 +55,14 @@ build/
 .env.test.local
 .env.production.local
 
+<<<<<<< HEAD
 # === Misc / OS ===
 .DS_Store
 Thumbs.db
 *.swp
 *.swo
+=======
+# OS / Misc
+.DS_Store
+Thumbs.db
+>>>>>>> afdb6b7 (Add project structure, docs, README, .gitignore)
