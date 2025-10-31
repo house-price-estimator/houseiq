@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./pages/Login.tsx";
+import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import PropertyForm from "./pages/PropertyForm";
 import PredictionResult from "./pages/PredictionResult";
