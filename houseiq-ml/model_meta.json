@@ -1,0 +1,20 @@
+{
+  "model_version": "rf-1.0.0",
+  "framework": "sklearn",
+  "algo": "RandomForestRegressor",
+  "features": [
+    "bedrooms",
+    "bathrooms",
+    "area_sqm",
+    "age_years",
+    "location_index"
+  ],
+  "seed": 42,
+  "metrics": {
+    "MAE": 137421.29444186698,
+    "RMSE": 219885.35836705464,
+    "MAPE%": 5.615374376523376,
+    "val_size": 10000,
+    "train_time_sec": 5.334
+  }
+}

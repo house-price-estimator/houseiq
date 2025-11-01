@@ -1,0 +1,104 @@
+# HouseIQ ML Service - Docker Ignore File
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Python build artifacts
+build/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Testing and coverage
+.pytest_cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.tox/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+.vs/
+.spyderproject
+.spyproject
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# Environment files
+.env
+.env.*
+*.env
+
+# Model files (will be copied separately if needed)
+# Uncomment if models should NOT be in image
+# *.joblib
+# *.pkl
+# model.joblib
+
+# Data files (large, typically not in image)
+data/
+*.csv
+*.parquet
+*.xlsx
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Docker
+Dockerfile
+.dockerignore
+docker-compose*.yml
+
+# Documentation
+README.md
+*.md
+
+# Scratch/test files
+scratch_*.py
+test_*.py
+generate_data.py

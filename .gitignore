@@ -1,232 +1,4 @@
-﻿# HouseIQ Project - Git Ignore File
-
-# ==========================================
-# Build Artifacts
-# ==========================================
-# Java/Maven
-**/target/
-**/.mvn/
-**/mvnw
-**/mvnw.cmd
-*.jar
-*.war
-*.ear
-*.class
-
-# Node.js/React
-**/node_modules/
-**/dist/
-**/build/
-**/.next/
-**/.vite/
-**/npm-debug.log*
-**/yarn-debug.log*
-**/yarn-error.log*
-**/lerna-debug.log*
-**/.pnpm-debug.log*
-**/package-lock.json.backup
-
-# Python
-**/__pycache__/
-**/*.py[cod]
-**/*$py.class
-**/*.so
-**/.Python
-**/build/
-**/develop-eggs/
-**/downloads/
-**/eggs/
-**/.eggs/
-**/lib/
-**/lib64/
-**/parts/
-**/sdist/
-**/var/
-**/wheels/
-**/*.egg-info/
-**/.installed.cfg
-**/*.egg
-**/MANIFEST
-**/.pytest_cache/
-**/.mypy_cache/
-**/.dmypy.json
-**/dmypy.json
-**/.coverage
-**/.coverage.*
-**/.cache
-**/nosetests.xml
-**/coverage.xml
-**/*.cover
-**/.hypothesis/
-
-# ==========================================
-# IDE and Editor Files
-# ==========================================
-# IntelliJ IDEA
-**/.idea/
-**/*.iml
-**/*.ipr
-**/*.iws
-
-# VSCode
-**/.vscode/
-**/.vs/
-
-# Eclipse
-**/.classpath
-**/.project
-**/.settings/
-**/.metadata/
-
-# NetBeans
-**/nbproject/
-
-# ==========================================
-# Environment and Configuration
-# ==========================================
-**/.env
-**/.env.*
-**/.env.local
-**/.env.development
-**/.env.test
-**/.env.production
-**/.env*.local
-**/*.env
-
-# ==========================================
-# ML Model Files (Large Binary Files)
-# ==========================================
-**/*.joblib
-**/*.pkl
-**/*.h5
-**/*.hdf5
-**/*.pt
-**/*.pth
-**/*.bin
-**/model.joblib
-**/model_meta.json
-
-# ==========================================
-# Data Files
-# ==========================================
-**/*.csv
-**/*.parquet
-**/*.xlsx
-**/*.xls
-**/data/
-**/datasets/
-**/raw_data/
-**/*.sqlite
-**/*.db
-
-# ==========================================
-# Logs
-# ==========================================
-**/*.log
-**/logs/
-**/*.log.*
-
-# ==========================================
-# OS Files
-# ==========================================
-# macOS
-**/.DS_Store
-**/.AppleDouble
-**/.LSOverride
-**/.DocumentRevisions-V100
-**/.fseventsd
-**/.Spotlight-V100
-**/.TemporaryItems
-**/.Trashes
-**/.VolumeIcon.icns
-**/.com.apple.timemachine.donotpresent
-**/.apdisk
-
-# Windows
-**/Thumbs.db
-**/Thumbs.db:encryptable
-**/ehthumbs.db
-**/ehthumbs_vista.db
-**/*.stackdump
-**/[Dd]esktop.ini
-**/$RECYCLE.BIN/
-**/*.cab
-**/*.msi
-**/*.msix
-**/*.msm
-**/*.msp
-**/*.lnk
-
-# Linux
-**/.directory
-**/.Trash-*
-**/.nfs*
-
-# ==========================================
-# Docker
-# ==========================================
-**/.dockerignore
-**/docker-compose.override.yml
-**/docker-volumes/
-**/*.dockerignore.backup
-
-# ==========================================
-# Temporary Files
-# ==========================================
-**/*.tmp
-**/*.temp
-**/*.swp
-**/*.swo
-**/*~*
-**/*.bak
-**/*.backup
-**/*.old
-**/.cache/
-
-# ==========================================
-# Archives
-# ==========================================
-**/*.zip
-**/*.tar
-**/*.tar.gz
-**/*.tgz
-**/*.rar
-**/*.7z
-**/*.bz2
-**/*.gz
-
-# ==========================================
-# Jupyter Notebooks
-# ==========================================
-**/.ipynb_checkpoints/
-**/*.ipynb
-
-# ==========================================
-# Service-Specific Ignore Patterns
-# ==========================================
-# Backend specific
-houseiq-backend/target/
-houseiq-backend/.mvn/
-
-# Frontend specific
-houseiq-frontend/dist/
-houseiq-frontend/node_modules/
-houseiq-frontend/.vite/
-
-# ML service specific
-houseiq-ml/__pycache__/
-houseiq-ml/*.joblib
-houseiq-ml/model.joblib
-houseiq-ml/model_meta.json
-houseiq-ml/data/
-
-# Root level
-node_modules/
-package-lock.json.backup
-
-
-
-# ==========================================
+﻿# ==========================================
 # Frontend - Ignore entire frontend directory
 # ==========================================
 houseiq-frontend/
@@ -256,12 +28,30 @@ houseiq-ml/env/
 
 # ==========================================
 # ML Model Files and Data (excluded from git)
+# BUT track specific items below
 # ==========================================
 houseiq-ml/model.joblib
-houseiq-ml/model_meta.json
+# Note: model_meta.json will be tracked (see override below)
+
+# Ignore data folder by default, but override below to track it
 houseiq-ml/data/
+
+# Ignore parquet files by default, but override below to track them in houseiq-ml/data/
 houseiq-ml/*.parquet
-houseiq-ml/*.csv
+
+# ==========================================
+# ML Service - Track specific files/folders (override ignores above)
+# ==========================================
+# Track .dockerignore file
+!houseiq-ml/.dockerignore
+
+# Track model_meta.json
+!houseiq-ml/model_meta.json
+
+# Track data folder and its contents (including parquet files)
+!houseiq-ml/data/
+!houseiq-ml/data/**/*.parquet
+!houseiq-ml/data/**/*
 
 # ==========================================
 # Environment and Configuration Files

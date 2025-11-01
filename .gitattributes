@@ -1,6 +1,5 @@
 # Normalize by default
 * text=auto
-
 # Force LF for source & config (good for Docker/Linux containers)
 *.py       text eol=lf
 *.java     text eol=lf
@@ -13,14 +12,12 @@
 *.properties text eol=lf
 Dockerfile text eol=lf
 *.sh       text eol=lf
-
 # Keep Windows-native endings for Windows scripts
 *.bat      text eol=crlf
 *.cmd      text eol=crlf
-
 # Binary files (never modify line endings)
 *.jar      binary
-*.joblib   binary
+*.joblib filter=lfs diff=lfs merge=lfs -text
 *.parquet  binary
 *.pkl      binary
 *.png      binary
