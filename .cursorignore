@@ -1,0 +1,159 @@
+# Cursor ignore file - files that should be excluded from Cursor's context
+
+# ==========================================
+# Dependencies and Build Artifacts
+# ==========================================
+# Node.js
+**/node_modules/
+**/dist/
+**/build/
+**/.next/
+**/.vite/
+**/package-lock.json.backup
+
+# Java/Maven
+**/target/
+**/.mvn/
+**/*.jar
+**/*.war
+**/*.ear
+**/*.class
+
+# Python
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+**/.Python
+**/*.egg-info/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.coverage
+**/.hypothesis/
+
+# ==========================================
+# IDE and Editor Files
+# ==========================================
+**/.idea/
+**/.vscode/
+**/.vs/
+**/*.iml
+**/*.ipr
+**/*.iws
+**/.classpath
+**/.project
+**/.settings/
+**/nbproject/
+
+# ==========================================
+# Build Artifacts and Logs
+# ==========================================
+**/*.log
+**/logs/
+**/*.log.*
+
+# ==========================================
+# Large Binary Files
+# ==========================================
+# ML Model files
+**/*.joblib
+**/*.pkl
+**/*.h5
+**/*.hdf5
+**/*.pt
+**/*.pth
+**/*.bin
+**/model.joblib
+**/model_meta.json
+
+# Data files
+**/*.csv
+**/*.parquet
+**/*.xlsx
+**/*.xls
+**/data/
+**/datasets/
+**/raw_data/
+**/*.sqlite
+**/*.db
+
+# ==========================================
+# Environment and Configuration
+# ==========================================
+**/.env
+**/.env.*
+**/.env.local
+**/.env.development
+**/.env.test
+**/.env.production
+**/*.env
+
+# ==========================================
+# OS Files
+# ==========================================
+**/.DS_Store
+**/Thumbs.db
+**/Thumbs.db:encryptable
+**/ehthumbs.db
+**/*.swp
+**/*.swo
+
+# ==========================================
+# Docker
+# ==========================================
+**/docker-volumes/
+**/docker-compose.override.yml
+
+# ==========================================
+# Temporary and Backup Files
+# ==========================================
+**/*.tmp
+**/*.temp
+**/*.bak
+**/*.backup
+**/*.old
+**/.cache/
+
+# ==========================================
+# Archives
+# ==========================================
+**/*.zip
+**/*.tar
+**/*.tar.gz
+**/*.tgz
+**/*.rar
+**/*.7z
+
+# ==========================================
+# Jupyter Notebooks
+# ==========================================
+**/.ipynb_checkpoints/
+**/*.ipynb
+
+# ==========================================
+# Git
+# ==========================================
+**/.git/
+**/.gitignore
+
+# ==========================================
+# Service-Specific
+# ==========================================
+# Backend
+houseiq-backend/target/
+houseiq-backend/.mvn/
+
+# Frontend
+houseiq-frontend/dist/
+houseiq-frontend/node_modules/
+houseiq-frontend/.vite/
+
+# ML service
+houseiq-ml/__pycache__/
+houseiq-ml/data/
+houseiq-ml/model.joblib
+houseiq-ml/model_meta.json
+
+# Root level
+node_modules/
+

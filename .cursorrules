@@ -1,0 +1,76 @@
+# HouseIQ Project - Cursor Configuration
+
+## Project Overview
+HouseIQ is a microservices-based application with three main services:
+- **houseiq-backend**: Java Spring Boot 3.5.6 (Java 21) backend with MongoDB, Spring Security, and JWT authentication
+- **houseiq-frontend**: React 18 + Vite frontend with Chakra UI
+- **houseiq-ml**: Python FastAPI ML service using scikit-learn
+
+## Project Structure
+```
+houseiq/
+├── houseiq-backend/     # Java Spring Boot backend
+├── houseiq-frontend/    # React + Vite frontend
+├── houseiq-ml/          # Python FastAPI ML service
+└── infra/               # Docker Compose infrastructure
+```
+
+## Java (Spring Boot) Guidelines
+- Use **Java 21** features when appropriate
+- Follow Spring Boot best practices and conventions
+- Use **Lombok** for reducing boilerplate (@Builder, @Data, etc.)
+- Package structure: `za.co.houseiq.houseiqbackend`
+  - `auth/` - Authentication and authorization
+  - `common/` - Shared utilities and DTOs
+  - `config/` - Configuration classes
+  - `prediction/` - Prediction domain logic
+- Use **Spring WebFlux WebClient** for external API calls (ML service)
+- Use **Spring Data MongoDB** repositories
+- Follow RESTful API conventions
+- Use **Builder pattern** with Lombok for DTOs
+- Keep controllers thin, business logic in services
+
+## JavaScript/React Guidelines
+- Use **React 18** with **Vite** as the build tool
+- Use **Chakra UI** for UI components
+- Follow React functional components with hooks pattern
+- Use **React Router DOM** for routing
+- Keep components modular and reusable
+- Use ES6+ features (arrow functions, destructuring, etc.)
+- Follow the existing structure:
+  - `src/components/` - Reusable components
+  - `src/pages/` - Page components
+  - `src/hooks/` - Custom React hooks
+  - `src/api/` - API client utilities
+
+## Python (FastAPI) Guidelines
+- Use **FastAPI** framework
+- Follow Python PEP 8 style guide
+- Use **Pydantic** models for request/response validation
+- Keep ML logic in separate modules (train.py, main.py)
+- Use **scikit-learn** for ML models
+- Store trained models as `.joblib` files (excluded from git)
+- Keep API endpoints clean and well-documented
+
+## General Guidelines
+- **Never** commit sensitive data (.env files, secrets, API keys)
+- **Never** commit generated files (node_modules, target/, dist/, __pycache__, .joblib files)
+- Use meaningful variable and function names
+- Add appropriate comments for complex logic
+- Follow existing code patterns and conventions
+- Keep services loosely coupled
+- API communication between services via HTTP/REST
+- Use Docker Compose for local development
+
+## Code Style
+- Java: Use 4-space indentation, follow Spring Boot conventions
+- JavaScript/React: Use 2-space indentation, prefer const/let over var
+- Python: Use 4-space indentation, follow PEP 8
+
+## When Making Changes
+- Consider the microservices architecture - changes may affect multiple services
+- Update API contracts consistently across frontend/backend
+- Test changes in the context of the full stack when possible
+- Maintain backward compatibility when modifying APIs
+- Follow existing patterns for similar features
+

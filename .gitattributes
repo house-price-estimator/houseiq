@@ -1,0 +1,30 @@
+# Normalize by default
+* text=auto
+
+# Force LF for source & config (good for Docker/Linux containers)
+*.py       text eol=lf
+*.java     text eol=lf
+*.kt       text eol=lf
+*.xml      text eol=lf
+*.yml      text eol=lf
+*.yaml     text eol=lf
+*.json     text eol=lf
+*.md       text eol=lf
+*.properties text eol=lf
+Dockerfile text eol=lf
+*.sh       text eol=lf
+
+# Keep Windows-native endings for Windows scripts
+*.bat      text eol=crlf
+*.cmd      text eol=crlf
+
+# Binary files (never modify line endings)
+*.jar      binary
+*.joblib   binary
+*.parquet  binary
+*.pkl      binary
+*.png      binary
+*.jpg      binary
+*.jpeg     binary
+*.ico      binary
+*.pdf      binary
