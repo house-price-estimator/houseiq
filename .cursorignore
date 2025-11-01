@@ -157,3 +157,4 @@ houseiq-ml/model_meta.json
 # Root level
 node_modules/
 
+/legacy
