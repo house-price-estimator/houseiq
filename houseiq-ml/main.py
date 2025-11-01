@@ -12,7 +12,6 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, conint, confloat
 
-from scratch_check import FEATURES
 
 # init fastapi web app
 app = FastAPI(title="HouseIQ ML Service", version="2.0.0")

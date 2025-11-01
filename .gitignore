@@ -30,14 +30,6 @@ houseiq-ml/env/
 # ML Model Files and Data (excluded from git)
 # BUT track specific items below
 # ==========================================
-houseiq-ml/model.joblib
-# Note: model_meta.json will be tracked (see override below)
-
-# Ignore data folder by default, but override below to track it
-houseiq-ml/data/
-
-# Ignore parquet files by default, but override below to track them in houseiq-ml/data/
-houseiq-ml/*.parquet
 
 # ==========================================
 # ML Service - Track specific files/folders (override ignores above)
