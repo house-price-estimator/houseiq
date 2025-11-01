@@ -1,5 +1,4 @@
 // src/pages/PropertyForm.tsx
-import React from "react";
 import { useState } from "react";
 import {
   Box,
@@ -18,10 +17,10 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { predictionAPI } from "../../../src/api/client";
-import Navbar from "../../../src/components/Navbar";
-import AnimatedBackground from "../../../src/components/AnimatedBackground";
-import RealEstateTipsFeed from "../../../src/components/RealEstateTipsFeed";
+import { predictionAPI } from "../api/client";
+import Navbar from "../components/Navbar";
+import AnimatedBackground from "../components/AnimatedBackground";
+import RealEstateTipsFeed from "../components/RealEstateTipsFeed";
 
 const PropertyForm = () => {
   const navigate = useNavigate();
@@ -112,10 +111,11 @@ const PropertyForm = () => {
           input: { bedrooms, bathrooms, floorArea, propertyAge, locationIndex },
         },
       });
-    } catch (error: any) {
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "Failed to get prediction. Please try again.";
       toast({
         title: "Prediction Failed",
-        description: error.message || "Failed to get prediction. Please try again.",
+        description: errorMessage,
         status: "error",
         duration: 5000,
         isClosable: true,

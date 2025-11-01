@@ -1,25 +1,73 @@
-# HouseIQ: House Price Estimator
+# React + TypeScript + Vite
 
-In the real estate sector, many stakeholders (agents, sellers, buyers) still rely on ad hoc spreadsheets and subjective judgement to estimate property prices. This often results in inconsistent valuations and poor decision-making. Our proposed solution, HouseIQ, is an end-to-end application designed to predict property prices based on key attributes such as number of bedrooms, bathrooms, floor area, property age, and location index. The system will provide transparent explanations for each estimate and maintain a record of valuations for audit and reporting purposes.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Tech Stack
-- **Backend**: Java + Spring Boot
-- **ML Service**: Python + FastAPI
-- **Database**: MongoDB (or PostgreSQL)
-- **Frontend**: React + Vite + Chakra UI
-- **Version Control**: Git + GitHub
+Currently, two official plugins are available:
 
-## Repository Structure
-backend/ → Spring Boot backend API  
-ml-service/ → FastAPI ML microservice  
-frontend/ → React + Chakra UI frontend  
-db/ → Database schema and scripts  
-docs/ → Documentation (SRS, feasibility, planning, diagrams)
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Team
-- Verona Surajlall
-- Ajmal Ahmad
-- Azhar Moola
-- Clivan Tolk
-- Creflo Jordaan
-- Dylan Trytsman
+## React Compiler
+
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
+
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```

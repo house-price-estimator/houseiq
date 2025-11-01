@@ -1,5 +1,4 @@
 // src/pages/PredictionResult.tsx
-import React from "react";
 import { Box, Button, Flex, Heading, Text, VStack, useToast } from "@chakra-ui/react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CreatePredictionResponse } from "../api/client";

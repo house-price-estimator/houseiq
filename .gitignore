@@ -5,13 +5,10 @@
 # ==========================================
 
 # Node.js - Frontend build artifacts
-houseiq-frontend/frontend/node_modules/
-houseiq-frontend/frontend/dist/
-houseiq-frontend/frontend/build/
-houseiq-frontend/frontend/.next/
-houseiq-frontend/frontend/.vite/
 houseiq-frontend/node_modules/
 houseiq-frontend/dist/
+houseiq-frontend/build/
+houseiq-frontend/.next/
 houseiq-frontend/.vite/
 **/package-lock.json.backup
 
