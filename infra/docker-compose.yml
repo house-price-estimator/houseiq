@@ -39,7 +39,7 @@ services:
 
   frontend:
     build:
-      context: ../houseiq-frontend/frontend
+      context: ../houseiq-frontend
     container_name: houseiq-frontend
     ports:
       - "5173:5173"
