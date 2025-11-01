@@ -1,39 +1,59 @@
-﻿# ==========================================
-# Frontend - Ignore entire frontend directory
-# ==========================================
-houseiq-frontend/
-
-# ==========================================
-# Root Level - Ignore root node_modules and package files
-# ==========================================
-node_modules/
-package-lock.json
+﻿# HouseIQ Project - Git Ignore File
 
 # ==========================================
 # Dependencies and Build Artifacts
 # ==========================================
 
+# Node.js - Frontend build artifacts
+houseiq-frontend/frontend/node_modules/
+houseiq-frontend/frontend/dist/
+houseiq-frontend/frontend/build/
+houseiq-frontend/frontend/.next/
+houseiq-frontend/frontend/.vite/
+houseiq-frontend/node_modules/
+houseiq-frontend/dist/
+houseiq-frontend/.vite/
+**/package-lock.json.backup
+
 # Java/Maven - Backend build artifacts
 houseiq-backend/target/
 houseiq-backend/.mvn/wrapper/maven-wrapper.jar
+**/*.jar
+**/*.war
+**/*.ear
+**/*.class
 
 # Python - ML service cache and virtual environments
 houseiq-ml/__pycache__/
 houseiq-ml/**/__pycache__/
+houseiq-ml/tests/__pycache__/
 houseiq-ml/*.pyc
 houseiq-ml/*.pyo
 houseiq-ml/.venv/
 houseiq-ml/venv/
 houseiq-ml/env/
+houseiq-ml/ENV/
+**/*.egg-info/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.coverage
+**/.hypothesis/
 
 # ==========================================
-# ML Model Files and Data (excluded from git)
-# BUT track specific items below
+# ML Model Files and Data
 # ==========================================
+# Model files (excluded from git)
+houseiq-ml/*.joblib
+houseiq-ml/*.pkl
+houseiq-ml/model.joblib
 
-# ==========================================
+# Data files (excluded, but track specific items below)
+houseiq-ml/*.csv
+houseiq-ml/*.parquet
+houseiq-ml/*.xlsx
+houseiq-ml/*.xls
+
 # ML Service - Track specific files/folders (override ignores above)
-# ==========================================
 # Track .dockerignore file
 !houseiq-ml/.dockerignore
 
@@ -49,32 +69,89 @@ houseiq-ml/env/
 # Environment and Configuration Files
 # ==========================================
 **/.env
+**/.env.*
 **/.env.local
+**/.env.development
+**/.env.test
+**/.env.production
 **/.env.*.local
 **/.env.development.local
 **/.env.test.local
 **/.env.production.local
+**/*.env
 
 # ==========================================
 # IDE and Editor Files
 # ==========================================
-.idea/
-.vscode/
-*.swp
-*.swo
-*~
-.DS_Store
-Thumbs.db
+**/.idea/
+**/.vscode/
+**/.vs/
+**/*.iml
+**/*.ipr
+**/*.iws
+**/.classpath
+**/.project
+**/.settings/
+**/nbproject/
 
 # ==========================================
-# Logs and Temporary Files
+# Build Artifacts and Logs
 # ==========================================
-*.log
-*.tmp
-*.temp
+**/*.log
+**/logs/
+**/*.log.*
+
+# ==========================================
+# OS Files
+# ==========================================
+**/.DS_Store
+**/Thumbs.db
+**/Thumbs.db:encryptable
+**/ehthumbs.db
+**/*.swp
+**/*.swo
+**/*~
 
 # ==========================================
 # Docker
 # ==========================================
-docker-compose.override.yml
-/legacy
+**/docker-volumes/
+**/docker-compose.override.yml
+
+# ==========================================
+# Temporary and Backup Files
+# ==========================================
+**/*.tmp
+**/*.temp
+**/*.bak
+**/*.backup
+**/*.old
+**/.cache/
+
+# ==========================================
+# Archives
+# ==========================================
+**/*.zip
+**/*.tar
+**/*.tar.gz
+**/*.tgz
+**/*.rar
+**/*.7z
+
+# ==========================================
+# Jupyter Notebooks
+# ==========================================
+**/.ipynb_checkpoints/
+**/*.ipynb
+
+# ==========================================
+# Root Level
+# ==========================================
+node_modules/
+package-lock.json
+
+# ==========================================
+# Legacy Folder (DO NOT COMMIT)
+# ==========================================
+/legacy/
+legacy/

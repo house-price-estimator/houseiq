@@ -17,9 +17,6 @@ import org.springframework.security.core.Authentication;
 public class PredictionController {
     private final PredictionService service;        // injected service used by endpoints
 
-    // TEMP until JWT (M4): use a fixed owner id
-    private static final String OWNER = "dev-user";     // hardcoded owner id used as placeholder until JWT
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CreatePredictionDto create(Authentication auth, @Valid @RequestBody PredictRequestDto req) {
