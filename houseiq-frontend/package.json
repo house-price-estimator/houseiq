@@ -8,7 +8,7 @@
     "npm": ">=10.0.0"
   },
   "scripts": {
-    "preinstall": "npm install --force @rollup/rollup-linux-x64-gnu || true",
+    "postinstall": "npm install --no-save --force @rollup/rollup-linux-x64-gnu || true",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",

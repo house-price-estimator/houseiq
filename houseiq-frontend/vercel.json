@@ -3,7 +3,7 @@
     "outputDirectory": "dist",
     "devCommand": "npm run dev",
     "framework": "vite",
-    "installCommand": "npm install --include=optional",
+    "installCommand": "rm -f package-lock.json && npm install --legacy-peer-deps",
     "rewrites": [
       {
         "source": "/(.*)",
