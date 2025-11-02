@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: houseiq-ml
+    env: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    envVars:
+      - key: MODEL_PATH
+        value: /app/model.joblib
+      - key: META_PATH
+        value: /app/model_meta.json
+    healthCheckPath: /health
