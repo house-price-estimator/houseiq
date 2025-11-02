@@ -2,11 +2,16 @@ FROM node:20
 
 WORKDIR /app
 
-# Copy package files
+# Copy package files (including lock file for version consistency)
 COPY package*.json ./
 
-# Install dependencies (include optional dependencies for Rollup native bindings)
+# Install dependencies - use npm ci to preserve exact versions
+# Include optional dependencies for Rollup native bindings
 RUN npm ci --include=optional || npm install --include=optional
+
+# Explicitly install Rollup native binding after main install
+# This doesn't modify package-lock.json due to --no-save flag
+RUN npm install --no-save --force @rollup/rollup-linux-x64-gnu || true
 
 # Copy source code
 COPY . .
