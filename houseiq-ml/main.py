@@ -34,6 +34,7 @@ app.add_middleware(
 MODEL = None
 FEATURES_ORDER = ["bedrooms", "bathrooms", "area_sqm", "age_years", "location_index"]
 MODEL_VERSION = "unknown"
+FEATURE_IMPORTANCES: Dict[str, float] | None = None
 
 
 #---------------------------------------------------------------------------------------
@@ -45,7 +46,7 @@ class Features(BaseModel):
     bathrooms: conint(ge=1, le=5)
     area_sqm: confloat(gt=0, le=1000)
     age_years: conint(ge=0, le=120)
-    location_index: conint(ge=0, le=99)
+    location_index: conint(ge=0, le=10)
 
 class PredictRequest(BaseModel):
     features: Features
@@ -53,6 +54,7 @@ class PredictRequest(BaseModel):
 class PredictResponse(BaseModel):
     predicted_price: float
     model_version: str
+    explanations: Dict[str, float] | None = None
 
 
 #---------------------------------------------------------------------------------------
@@ -61,7 +63,7 @@ class PredictResponse(BaseModel):
 
 @app.on_event("startup")
 def load_model()-> None:
-    global MODEL, FEATURES_ORDER, MODEL_VERSION
+    global MODEL, FEATURES_ORDER, MODEL_VERSION, FEATURE_IMPORTANCES
     model_path = Path(os.getenv("MODEL_PATH", "model.joblib"))
     meta_path = Path(os.getenv("META_PATH", "model_meta.json"))
 
@@ -75,6 +77,9 @@ def load_model()-> None:
         feat = meta.get("features")
         if isinstance(feat, list) and feat:
             FEATURES_ORDER = feat
+        fi = meta.get("feature_importances")
+        if isinstance(fi, dict):
+            FEATURE_IMPORTANCES = {k: float(v) for k, v in fi.items() if k in FEATURES_ORDER}
 
 
 #---------------------------------------------------------------------------------------
@@ -104,14 +109,25 @@ def _predict_dict(d: Dict[str, float]) -> float:
     y = float(MODEL.predict(df)[0])
     return y # return prediction
 
+def _compute_explanations(d: Dict[str, float]) -> Dict[str, float]:
+    # Prefer provided feature importances; normalize to sum 1.0
+    if FEATURE_IMPORTANCES and len(FEATURE_IMPORTANCES) > 0:
+        total = sum(abs(v) for v in FEATURE_IMPORTANCES.values()) or 1.0
+        return {k: (abs(FEATURE_IMPORTANCES.get(k, 0.0)) / total) for k in FEATURES_ORDER}
+    # Fallback: equal weights
+    n = len(FEATURES_ORDER) or 1
+    return {k: 1.0 / n for k in FEATURES_ORDER}
+
 
 # End point: Predict
 # this endpoint expects a JSON with {features: {x:1,y:2,...}}
 @app.post("/predict", response_model=PredictResponse)
 def predict(body: PredictRequest):
     try:
-        y = _predict_dict(body.features.model_dump()) # get prediction
-        return PredictResponse(predicted_price=y, model_version=MODEL_VERSION)
+        f = body.features.model_dump() # features dict
+        y = _predict_dict(f) # get prediction
+        explanations = _compute_explanations(f)
+        return PredictResponse(predicted_price=y, model_version=MODEL_VERSION, explanations=explanations)
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
@@ -120,8 +136,10 @@ def predict(body: PredictRequest):
 @app.post("/predict/flat", response_model=PredictResponse)
 def predict_flat(features: Features):
     try:
-        y = _predict_dict(features.model_dump())
-        return PredictResponse(predicted_price=y, model_version=MODEL_VERSION)
+        f = features.model_dump()
+        y = _predict_dict(f)
+        explanations = _compute_explanations(f)
+        return PredictResponse(predicted_price=y, model_version=MODEL_VERSION, explanations=explanations)
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 

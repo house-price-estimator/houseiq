@@ -247,7 +247,7 @@ const PropertyForm = () => {
               </FormLabel>
               <NumberInput
                 min={0}
-                max={99}
+                max={10}
                 value={locationIndex}
                 onChange={(value: string) => setLocationIndex(Number(value))}
                 size="lg"

@@ -10,6 +10,7 @@ public class CreatePredictionDto {
     private Map<String, Object> features;
     private double predicted_price;
     private String model_version;
+    private Map<String, Double> explanations;
     private Instant createdAt;
     private Instant updatedAt;
     private int version;

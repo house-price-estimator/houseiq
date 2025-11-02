@@ -190,6 +190,25 @@ export default function HistoryPage() {
                       </Text>
                     </HStack>
 
+                    {/* Explanations */}
+                    {prediction.explanations && (
+                      <Box>
+                        <Text fontWeight="semibold" color="cyan.300" fontSize="sm" mb={1}>
+                          Top Factors
+                        </Text>
+                        <VStack align="stretch" spacing={1}>
+                          {Object.entries(prediction.explanations)
+                            .sort((a, b) => b[1] - a[1])
+                            .slice(0, 3)
+                            .map(([k, v]) => (
+                              <Text key={k} color="cyan.200" fontSize="sm">
+                                {k.replace(/_/g, " ")}: {(v * 100).toFixed(0)}%
+                              </Text>
+                            ))}
+                        </VStack>
+                      </Box>
+                    )}
+
                     {/* Delete Button */}
                     <Button
                       variant="outline"

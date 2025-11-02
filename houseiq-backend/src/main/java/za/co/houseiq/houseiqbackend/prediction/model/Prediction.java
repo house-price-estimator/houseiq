@@ -19,6 +19,7 @@ public class Prediction {
     private Map<String, Object> features;       // store input as a map (BSON)
     private double predictedPrice;              // model output
     private String modelVersion;                // model version that produced output
+    private Map<String, Double> explanations;   // feature explanations (proportions)
 
     private Instant createdAt;                  // Timestamps
     private Instant updatedAt;

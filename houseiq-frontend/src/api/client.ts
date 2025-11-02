@@ -45,6 +45,7 @@ export interface Prediction {
   features: Record<string, any>;
   predictedPrice: number;
   modelVersion: string;
+  explanations?: Record<string, number>;
   createdAt: string;
   updatedAt: string;
   version: number;
@@ -55,6 +56,7 @@ export interface CreatePredictionResponse {
   features: Record<string, any>;
   predicted_price: number;
   model_version: string;
+  explanations?: Record<string, number>;
   createdAt: string;
   updatedAt: string;
   version: number;

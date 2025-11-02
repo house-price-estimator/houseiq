@@ -9,5 +9,5 @@ public class PredictRequestDto {
     @Min(1) @Max(5) private int bathrooms;
     @Positive @Max(1000) private double area_sqm;
     @Min(0) @Max(120) private int age_years;
-    @Min(0) @Max(99) private int location_index;
+    @Min(0) @Max(10) private int location_index;
 }

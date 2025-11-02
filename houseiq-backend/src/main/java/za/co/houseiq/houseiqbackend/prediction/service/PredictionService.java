@@ -10,12 +10,14 @@ import za.co.houseiq.houseiqbackend.prediction.dto.PredictRequestDto;
 import za.co.houseiq.houseiqbackend.prediction.dto.PredictResponseDto;
 import za.co.houseiq.houseiqbackend.prediction.model.Prediction;
 import za.co.houseiq.houseiqbackend.prediction.repo.PredictionRepository;
+import za.co.houseiq.houseiqbackend.common.activity.ActivityLogService;
 
 @Service                                    // create a spring service (build features, call ml, persist, return dto
 @RequiredArgsConstructor
 public class PredictionService {
     private final PredictionRepository repo;    // inject repository
     private final MlClient mlClient;            // inject HTTP client
+    private final ActivityLogService activityLogs;
 
     public CreatePredictionDto createPrediction(String ownerId, PredictRequestDto req) {
         Map<String,Object> features = Map.of(               // map of input features to getters of DTO
@@ -34,6 +36,7 @@ public class PredictionService {
             .features(features)
             .predictedPrice(ml.getPredicted_price())
             .modelVersion(ml.getModel_version())
+            .explanations(ml.getExplanations())
             .createdAt(now)
             .updatedAt(now)
             .version(1)
@@ -41,11 +44,18 @@ public class PredictionService {
 
         p = repo.save(p);                                       // persist to MongoDB. return saved instance
 
+        activityLogs.record(ownerId, "PREDICTION_CREATED", Map.of(
+            "predictionId", p.getId(),
+            "predictedPrice", p.getPredictedPrice(),
+            "modelVersion", p.getModelVersion()
+        ));
+
         return CreatePredictionDto.builder()                    // build and return DTO containing the persisted record's data
             .id(p.getId())
             .features(p.getFeatures())
             .predicted_price(p.getPredictedPrice())
             .model_version(p.getModelVersion())
+            .explanations(p.getExplanations())
             .createdAt(p.getCreatedAt())
             .updatedAt(p.getUpdatedAt())
             .version(p.getVersion())
@@ -54,16 +64,31 @@ public class PredictionService {
 
     // query mongoDB for a page of predictions for ownerId, sorted by createdAt descending
     public java.util.List<Prediction> list(String ownerId, int page, int size) {
-        return repo.findByOwnerIdOrderByCreatedAtDesc(ownerId, PageRequest.of(page, size));
+        var result = repo.findByOwnerIdOrderByCreatedAtDesc(ownerId, PageRequest.of(page, size));
+        activityLogs.record(ownerId, "PREDICTION_LISTED", Map.of(
+            "page", page,
+            "size", size,
+            "returned", result.size()
+        ));
+        return result;
     }
 
     //load a prediction by id and return it only if its ownerId matches the caller
     public java.util.Optional<Prediction> get(String ownerId, String id) {
-        return repo.findById(id).filter(p -> p.getOwnerId().equals(ownerId));
+        var opt = repo.findById(id).filter(p -> p.getOwnerId().equals(ownerId));
+        opt.ifPresent(p -> activityLogs.record(ownerId, "PREDICTION_VIEWED", Map.of(
+            "predictionId", p.getId()
+        )));
+        return opt;
     }
 
     // find by id, check ownership, and delete only when the owner matches
     public void delete(String ownerId, String id) {
-        repo.findById(id).filter(p -> p.getOwnerId().equals(ownerId)).ifPresent(repo::delete);
+        repo.findById(id).filter(p -> p.getOwnerId().equals(ownerId)).ifPresent(p -> {
+            repo.delete(p);
+            activityLogs.record(ownerId, "PREDICTION_DELETED", Map.of(
+                "predictionId", p.getId()
+            ));
+        });
     }
 }

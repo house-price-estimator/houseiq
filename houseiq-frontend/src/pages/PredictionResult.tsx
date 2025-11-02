@@ -82,6 +82,7 @@ const PredictionResult = () => {
   }
 
   const predictedPrice = prediction.predicted_price || 0;
+  const explanations = prediction.explanations || undefined;
 
   return (
     <AnimatedBackground>
@@ -147,6 +148,31 @@ const PredictionResult = () => {
                   <Text color="cyan.200">
                     <strong>Location Index:</strong> {input.locationIndex}
                   </Text>
+                </VStack>
+              </Box>
+            )}
+
+            {explanations && (
+              <Box
+                bg="rgba(15, 23, 42, 0.6)"
+                p={4}
+                borderRadius="lg"
+                w="full"
+                borderWidth="1px"
+                borderColor="cyan.800"
+              >
+                <Text fontSize="sm" fontWeight="semibold" color="cyan.300" mb={3}>
+                  Top Factors
+                </Text>
+                <VStack align="stretch" spacing={1}>
+                  {Object.entries(explanations)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 5)
+                    .map(([k, v]) => (
+                      <Text key={k} color="cyan.200" fontSize="sm">
+                        {k.replace(/_/g, " ")}: {(v * 100).toFixed(0)}%
+                      </Text>
+                    ))}
                 </VStack>
               </Box>
             )}
