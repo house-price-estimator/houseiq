@@ -1,5 +1,5 @@
 {
-  "model_version": "rf-1.0.0",
+  "model_version": "rf-2.0.0",
   "framework": "sklearn",
   "algo": "RandomForestRegressor",
   "features": [
@@ -11,10 +11,11 @@
   ],
   "seed": 42,
   "metrics": {
-    "MAE": 137421.29444186698,
-    "RMSE": 219885.35836705464,
-    "MAPE%": 5.615374376523376,
+    "MAE": 137060.4378087764,
+    "RMSE": 222936.9375023277,
+    "MAPE%": 5.772728694959762,
     "val_size": 10000,
-    "train_time_sec": 5.334
-  }
+    "train_time_sec": 0.252
+  },
+  "compression": 3
 }

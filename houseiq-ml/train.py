@@ -3,7 +3,6 @@ from __future__ import annotations
 import argparse, json, time
 from pathlib import Path
 
-
 import joblib
 import numpy as np
 import pandas as pd
@@ -39,30 +38,30 @@ def train(data_path: Path, seed: int = 42):
     # 2. Split data
     X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=seed)
 
-    # 3. Create Model
+    # 3. Create Model - OPTIMIZED FOR SIZE
     model = RandomForestRegressor(
-        n_estimators=400,  # number of trees (Higher = more stable but slower)
-        max_depth=None,    # trees grow until leaves are pure or too small
-        min_samples_leaf=1,# smalled allowed leaf size
-        n_jobs=-1,         # use all CPU Cores
-        random_state=seed, # reproducible model
+        n_estimators=50,      # Reduced from 400 to 50 (8x smaller)
+        max_depth=15,         # Limited depth (was None/unlimited)
+        min_samples_leaf=5,   # Increased from 1 (reduces overfitting & size)
+        min_samples_split=10, # Additional constraint to reduce tree size
+        max_features='sqrt',  # Use sqrt of features (standard practice)
+        n_jobs=-1,            # use all CPU Cores
+        random_state=seed,    # reproducible model
     )
 
-
     # 4. Fit data to model
-    t0 = time.time() # record T0
+    t0 = time.time()
     model.fit(X_train, y_train)
-    train_time = time.time() - t0 # Time = current time - T0
+    train_time = time.time() - t0
 
     # 5. Predict
     pred = model.predict(X_val)
 
     # 6. Metrics
-    mae = float(mean_absolute_error(y_val, pred))                # Mean Absolute Error
-    mse  = mean_squared_error(y_val, pred)                       # Mean Squared Error
-    rmse = float(np.sqrt(mse))                                   # Root Mean Square Error
-    mape_val = mape(y_val, pred)                                 # Mean Absolute Percentage Error
-
+    mae = float(mean_absolute_error(y_val, pred))
+    mse  = mean_squared_error(y_val, pred)
+    rmse = float(np.sqrt(mse))
+    mape_val = mape(y_val, pred)
 
     # 7. Collect Stats
     metrics = {
@@ -80,19 +79,22 @@ def train(data_path: Path, seed: int = 42):
 
 # CLI Interface
 def main():
-    ap = argparse.ArgumentParser() # init CLI
-    ap.add_argument("--data", type=Path, default=Path("data/synth_train.parquet")) # location of training data
-    ap.add_argument("--out", type=Path, default=Path("model.joblib"))              # path to store trained model
-    ap.add_argument("--meta", type=Path, default=Path("model_meta.json"))          # path to store metadata
-    ap.add_argument("--version", type=str, default="rf-1.0.0")                     # version string for traceability
-    ap.add_argument("--seed", type=int, default=42)                                # specify seed for reproducibility
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--data", type=Path, default=Path("data/synth_train.parquet"))
+    ap.add_argument("--out", type=Path, default=Path("model.joblib"))
+    ap.add_argument("--meta", type=Path, default=Path("model_meta.json"))
+    ap.add_argument("--version", type=str, default="rf-2.0.0")  # Updated version
+    ap.add_argument("--seed", type=int, default=42)
+    ap.add_argument("--compress", type=int, default=3, help="Compression level 0-9 (higher = smaller file)")
     args = ap.parse_args()
 
     # train model
     model, metrics = train(args.data, args.seed)
 
-    # persist trained model to disk
-    joblib.dump(model, args.out)
+    # persist trained model with compression
+    # Compression levels: 0 (no compression) to 9 (max compression)
+    # Level 3 is a good balance between size and speed
+    joblib.dump(model, args.out, compress=args.compress)
 
     # prepare metadata
     meta = {
@@ -102,6 +104,7 @@ def main():
         "features": FEATURES,
         "seed": args.seed,
         "metrics": metrics,
+        "compression": args.compress,
     }
     # write metadata to path
     args.meta.write_text(json.dumps(meta, indent=2))
@@ -110,8 +113,11 @@ def main():
     print("Saved model to:", args.out)
     print("Saved meta to:", args.meta)
     print("Metrics:", json.dumps(metrics, indent=2))
-
-
+    
+    # Print file size
+    import os
+    size_mb = os.path.getsize(args.out) / (1024 * 1024)
+    print(f"Model size: {size_mb:.2f} MB")
 
 
 if __name__ == "__main__":
