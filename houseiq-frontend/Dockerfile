@@ -5,11 +5,8 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci
-
-# Explicitly install rollup to ensure native bindings are available
-RUN npm install rollup --save-dev
+# Install dependencies (include optional dependencies for Rollup native bindings)
+RUN npm ci --include=optional || npm install --include=optional
 
 # Copy source code
 COPY . .
@@ -24,4 +21,3 @@ CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
 # RUN npm run build
 # EXPOSE 80
 # CMD ["npm", "run", "preview", "--", "--host", "0.0.0.0", "--port", "80"]
-
