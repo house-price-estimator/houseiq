@@ -2,8 +2,8 @@
     "buildCommand": "npm run build",
     "outputDirectory": "dist",
     "devCommand": "npm run dev",
-    "installCommand": "npm ci",
     "framework": "vite",
+    "installCommand": "npm install --include=optional",
     "rewrites": [
       {
         "source": "/(.*)",

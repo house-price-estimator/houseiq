@@ -10,7 +10,6 @@ houseiq-frontend/dist/
 houseiq-frontend/build/
 houseiq-frontend/.next/
 houseiq-frontend/.vite/
-**/package-lock.json.backup
 
 # Java/Maven - Backend build artifacts
 houseiq-backend/target/
@@ -141,11 +140,6 @@ houseiq-ml/*.xls
 **/.ipynb_checkpoints/
 **/*.ipynb
 
-# ==========================================
-# Root Level
-# ==========================================
-node_modules/
-package-lock.json
 
 # ==========================================
 # Legacy Folder (DO NOT COMMIT)
