@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+    <testsuite name="pytest" errors="0" failures="0" skipped="0" tests="6" time="1.332" timestamp="2025-11-03T11:08:43.282839+02:00" hostname="Dylan">
+        <testcase classname="test_api" name="test_health_ok" time="1.214" />
+        <testcase classname="test_api" name="test_predict_happy_path" time="0.030" />
+        <testcase classname="test_api" name="test_predict_happy_path_flat" time="0.022" />
+        <testcase classname="test_api" name="test_predict_monotonic_area_flat" time="0.044" />
+        <testcase classname="test_api" name="test_predict_validation_out_of_range_bedrooms" time="0.002" />
+        <testcase classname="test_api" name="test_predict_missing_feature" time="0.003" />
+    </testsuite>
+</testsuites>

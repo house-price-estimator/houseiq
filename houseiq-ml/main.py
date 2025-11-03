@@ -9,24 +9,18 @@ from typing import Dict
 import joblib
 import pandas as pd
 from fastapi import FastAPI, HTTPException
+from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, conint, confloat
 
 
 # init fastapi web app
-app = FastAPI(title="HouseIQ ML Service", version="2.0.0")
+# lifespan defined below to load model at startup without deprecated on_event
+
 
 #---------------------------------------------------------------------------------------
 # CORS
 #---------------------------------------------------------------------------------------
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 #---------------------------------------------------------------------------------------
 # Config
 #---------------------------------------------------------------------------------------
@@ -58,10 +52,9 @@ class PredictResponse(BaseModel):
 
 
 #---------------------------------------------------------------------------------------
-# Startup event - load model, get meta data
+# Startup / Lifespan - load model, get meta data
 #---------------------------------------------------------------------------------------
 
-@app.on_event("startup")
 def load_model()-> None:
     global MODEL, FEATURES_ORDER, MODEL_VERSION, FEATURE_IMPORTANCES
     model_path = Path(os.getenv("MODEL_PATH", "model.joblib"))
@@ -80,6 +73,26 @@ def load_model()-> None:
         fi = meta.get("feature_importances")
         if isinstance(fi, dict):
             FEATURE_IMPORTANCES = {k: float(v) for k, v in fi.items() if k in FEATURES_ORDER}
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # load model on startup
+    load_model()
+    yield
+    # optional: add teardown if needed in future
+
+
+# Create app with lifespan
+app = FastAPI(title="HouseIQ ML Service", version="2.0.0", lifespan=lifespan)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 #---------------------------------------------------------------------------------------

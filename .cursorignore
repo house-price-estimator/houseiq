@@ -150,8 +150,7 @@ houseiq-frontend/.vite/
 # ML service
 houseiq-ml/__pycache__/
 houseiq-ml/data/
-houseiq-ml/model.joblib
-houseiq-ml/model_meta.json
+
 
 # Root level
 node_modules/

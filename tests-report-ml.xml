@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="6" failures="0" skipped="0" tests="6" time="3.289" timestamp="2025-11-03T10:30:25.155333+02:00" hostname="Dylan"><testcase classname="houseiq-ml.tests.test_api" name="test_health_ok" time="0.043"><error message="failed on setup with &quot;RuntimeError: Model_PATH not found: model.joblib&quot;">@pytest.fixture(scope="module")
+    def client():
+&gt;       with TestClient(app) as c:
+
+houseiq-ml\tests\conftest.py:19: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\testclient.py:694: in __enter__
+    portal.call(self.wait_startup)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\anyio\from_thread.py:291: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py:456: in result
+    return self.__get_result()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py:401: in __get_result
+    raise self._exception
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\anyio\from_thread.py:222: in _call_func
+    retval = await retval_or_awaitable
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\testclient.py:729: in wait_startup
+    await receive()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\testclient.py:720: in receive
+    self.task.result()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py:449: in result
+    return self.__get_result()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py:401: in __get_result
+    raise self._exception
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\anyio\from_thread.py:222: in _call_func
+    retval = await retval_or_awaitable
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\testclient.py:710: in lifespan
+    await self.app(scope, self.stream_receive.receive, self.stream_send.send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\fastapi\applications.py:1054: in __call__
+    await super().__call__(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\applications.py:113: in __call__
+    await self.middleware_stack(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\middleware\errors.py:151: in __call__
+    await self.app(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\middleware\cors.py:77: in __call__
+    await self.app(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\middleware\exceptions.py:49: in __call__
+    await self.app(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:716: in __call__
+    await self.middleware_stack(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:725: in app
+    await self.lifespan(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:694: in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:571: in __aenter__
+    await self._router.startup()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:673: in startup
+    handler()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    @app.on_event("startup")
+    def load_model()-&gt; None:
+        global MODEL, FEATURES_ORDER, MODEL_VERSION, FEATURE_IMPORTANCES
+        model_path = Path(os.getenv("MODEL_PATH", "model.joblib"))
+        meta_path = Path(os.getenv("META_PATH", "model_meta.json"))
+    
+        if not model_path.exists():
+&gt;           raise RuntimeError(f"Model_PATH not found: {model_path}")
+E           RuntimeError: Model_PATH not found: model.joblib
+
+houseiq-ml\main.py:71: RuntimeError</error></testcase><testcase classname="houseiq-ml.tests.test_api" name="test_predict_happy_path" time="0.001"><error message="failed on setup with &quot;RuntimeError: Model_PATH not found: model.joblib&quot;">@pytest.fixture(scope="module")
+    def client():
+&gt;       with TestClient(app) as c:
+
+houseiq-ml\tests\conftest.py:19: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\testclient.py:694: in __enter__
+    portal.call(self.wait_startup)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\anyio\from_thread.py:291: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py:456: in result
+    return self.__get_result()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py:401: in __get_result
+    raise self._exception
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\anyio\from_thread.py:222: in _call_func
+    retval = await retval_or_awaitable
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\testclient.py:729: in wait_startup
+    await receive()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\testclient.py:720: in receive
+    self.task.result()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py:449: in result
+    return self.__get_result()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py:401: in __get_result
+    raise self._exception
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\anyio\from_thread.py:222: in _call_func
+    retval = await retval_or_awaitable
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\testclient.py:710: in lifespan
+    await self.app(scope, self.stream_receive.receive, self.stream_send.send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\fastapi\applications.py:1054: in __call__
+    await super().__call__(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\applications.py:113: in __call__
+    await self.middleware_stack(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\middleware\errors.py:151: in __call__
+    await self.app(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\middleware\cors.py:77: in __call__
+    await self.app(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\middleware\exceptions.py:49: in __call__
+    await self.app(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:716: in __call__
+    await self.middleware_stack(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:725: in app
+    await self.lifespan(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:694: in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:571: in __aenter__
+    await self._router.startup()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:673: in startup
+    handler()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    @app.on_event("startup")
+    def load_model()-&gt; None:
+        global MODEL, FEATURES_ORDER, MODEL_VERSION, FEATURE_IMPORTANCES
+        model_path = Path(os.getenv("MODEL_PATH", "model.joblib"))
+        meta_path = Path(os.getenv("META_PATH", "model_meta.json"))
+    
+        if not model_path.exists():
+&gt;           raise RuntimeError(f"Model_PATH not found: {model_path}")
+E           RuntimeError: Model_PATH not found: model.joblib
+
+houseiq-ml\main.py:71: RuntimeError</error></testcase><testcase classname="houseiq-ml.tests.test_api" name="test_predict_happy_path_flat" time="0.001"><error message="failed on setup with &quot;RuntimeError: Model_PATH not found: model.joblib&quot;">@pytest.fixture(scope="module")
+    def client():
+&gt;       with TestClient(app) as c:
+
+houseiq-ml\tests\conftest.py:19: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\testclient.py:694: in __enter__
+    portal.call(self.wait_startup)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\anyio\from_thread.py:291: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py:456: in result
+    return self.__get_result()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py:401: in __get_result
+    raise self._exception
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\anyio\from_thread.py:222: in _call_func
+    retval = await retval_or_awaitable
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\testclient.py:729: in wait_startup
+    await receive()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\testclient.py:720: in receive
+    self.task.result()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py:449: in result
+    return self.__get_result()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py:401: in __get_result
+    raise self._exception
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\anyio\from_thread.py:222: in _call_func
+    retval = await retval_or_awaitable
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\testclient.py:710: in lifespan
+    await self.app(scope, self.stream_receive.receive, self.stream_send.send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\fastapi\applications.py:1054: in __call__
+    await super().__call__(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\applications.py:113: in __call__
+    await self.middleware_stack(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\middleware\errors.py:151: in __call__
+    await self.app(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\middleware\cors.py:77: in __call__
+    await self.app(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\middleware\exceptions.py:49: in __call__
+    await self.app(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:716: in __call__
+    await self.middleware_stack(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:725: in app
+    await self.lifespan(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:694: in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:571: in __aenter__
+    await self._router.startup()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:673: in startup
+    handler()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    @app.on_event("startup")
+    def load_model()-&gt; None:
+        global MODEL, FEATURES_ORDER, MODEL_VERSION, FEATURE_IMPORTANCES
+        model_path = Path(os.getenv("MODEL_PATH", "model.joblib"))
+        meta_path = Path(os.getenv("META_PATH", "model_meta.json"))
+    
+        if not model_path.exists():
+&gt;           raise RuntimeError(f"Model_PATH not found: {model_path}")
+E           RuntimeError: Model_PATH not found: model.joblib
+
+houseiq-ml\main.py:71: RuntimeError</error></testcase><testcase classname="houseiq-ml.tests.test_api" name="test_predict_monotonic_area_flat" time="0.001"><error message="failed on setup with &quot;RuntimeError: Model_PATH not found: model.joblib&quot;">@pytest.fixture(scope="module")
+    def client():
+&gt;       with TestClient(app) as c:
+
+houseiq-ml\tests\conftest.py:19: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\testclient.py:694: in __enter__
+    portal.call(self.wait_startup)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\anyio\from_thread.py:291: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py:456: in result
+    return self.__get_result()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py:401: in __get_result
+    raise self._exception
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\anyio\from_thread.py:222: in _call_func
+    retval = await retval_or_awaitable
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\testclient.py:729: in wait_startup
+    await receive()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\testclient.py:720: in receive
+    self.task.result()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py:449: in result
+    return self.__get_result()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py:401: in __get_result
+    raise self._exception
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\anyio\from_thread.py:222: in _call_func
+    retval = await retval_or_awaitable
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\testclient.py:710: in lifespan
+    await self.app(scope, self.stream_receive.receive, self.stream_send.send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\fastapi\applications.py:1054: in __call__
+    await super().__call__(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\applications.py:113: in __call__
+    await self.middleware_stack(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\middleware\errors.py:151: in __call__
+    await self.app(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\middleware\cors.py:77: in __call__
+    await self.app(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\middleware\exceptions.py:49: in __call__
+    await self.app(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:716: in __call__
+    await self.middleware_stack(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:725: in app
+    await self.lifespan(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:694: in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:571: in __aenter__
+    await self._router.startup()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:673: in startup
+    handler()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    @app.on_event("startup")
+    def load_model()-&gt; None:
+        global MODEL, FEATURES_ORDER, MODEL_VERSION, FEATURE_IMPORTANCES
+        model_path = Path(os.getenv("MODEL_PATH", "model.joblib"))
+        meta_path = Path(os.getenv("META_PATH", "model_meta.json"))
+    
+        if not model_path.exists():
+&gt;           raise RuntimeError(f"Model_PATH not found: {model_path}")
+E           RuntimeError: Model_PATH not found: model.joblib
+
+houseiq-ml\main.py:71: RuntimeError</error></testcase><testcase classname="houseiq-ml.tests.test_api" name="test_predict_validation_out_of_range_bedrooms" time="0.001"><error message="failed on setup with &quot;RuntimeError: Model_PATH not found: model.joblib&quot;">@pytest.fixture(scope="module")
+    def client():
+&gt;       with TestClient(app) as c:
+
+houseiq-ml\tests\conftest.py:19: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\testclient.py:694: in __enter__
+    portal.call(self.wait_startup)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\anyio\from_thread.py:291: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py:456: in result
+    return self.__get_result()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py:401: in __get_result
+    raise self._exception
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\anyio\from_thread.py:222: in _call_func
+    retval = await retval_or_awaitable
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\testclient.py:729: in wait_startup
+    await receive()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\testclient.py:720: in receive
+    self.task.result()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py:449: in result
+    return self.__get_result()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py:401: in __get_result
+    raise self._exception
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\anyio\from_thread.py:222: in _call_func
+    retval = await retval_or_awaitable
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\testclient.py:710: in lifespan
+    await self.app(scope, self.stream_receive.receive, self.stream_send.send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\fastapi\applications.py:1054: in __call__
+    await super().__call__(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\applications.py:113: in __call__
+    await self.middleware_stack(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\middleware\errors.py:151: in __call__
+    await self.app(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\middleware\cors.py:77: in __call__
+    await self.app(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\middleware\exceptions.py:49: in __call__
+    await self.app(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:716: in __call__
+    await self.middleware_stack(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:725: in app
+    await self.lifespan(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:694: in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:571: in __aenter__
+    await self._router.startup()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:673: in startup
+    handler()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    @app.on_event("startup")
+    def load_model()-&gt; None:
+        global MODEL, FEATURES_ORDER, MODEL_VERSION, FEATURE_IMPORTANCES
+        model_path = Path(os.getenv("MODEL_PATH", "model.joblib"))
+        meta_path = Path(os.getenv("META_PATH", "model_meta.json"))
+    
+        if not model_path.exists():
+&gt;           raise RuntimeError(f"Model_PATH not found: {model_path}")
+E           RuntimeError: Model_PATH not found: model.joblib
+
+houseiq-ml\main.py:71: RuntimeError</error></testcase><testcase classname="houseiq-ml.tests.test_api" name="test_predict_missing_feature" time="0.001"><error message="failed on setup with &quot;RuntimeError: Model_PATH not found: model.joblib&quot;">@pytest.fixture(scope="module")
+    def client():
+&gt;       with TestClient(app) as c:
+
+houseiq-ml\tests\conftest.py:19: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\testclient.py:694: in __enter__
+    portal.call(self.wait_startup)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\anyio\from_thread.py:291: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py:456: in result
+    return self.__get_result()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py:401: in __get_result
+    raise self._exception
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\anyio\from_thread.py:222: in _call_func
+    retval = await retval_or_awaitable
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\testclient.py:729: in wait_startup
+    await receive()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\testclient.py:720: in receive
+    self.task.result()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py:449: in result
+    return self.__get_result()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py:401: in __get_result
+    raise self._exception
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\anyio\from_thread.py:222: in _call_func
+    retval = await retval_or_awaitable
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\testclient.py:710: in lifespan
+    await self.app(scope, self.stream_receive.receive, self.stream_send.send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\fastapi\applications.py:1054: in __call__
+    await super().__call__(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\applications.py:113: in __call__
+    await self.middleware_stack(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\middleware\errors.py:151: in __call__
+    await self.app(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\middleware\cors.py:77: in __call__
+    await self.app(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\middleware\exceptions.py:49: in __call__
+    await self.app(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:716: in __call__
+    await self.middleware_stack(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:725: in app
+    await self.lifespan(scope, receive, send)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:694: in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:571: in __aenter__
+    await self._router.startup()
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\starlette\routing.py:673: in startup
+    handler()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    @app.on_event("startup")
+    def load_model()-&gt; None:
+        global MODEL, FEATURES_ORDER, MODEL_VERSION, FEATURE_IMPORTANCES
+        model_path = Path(os.getenv("MODEL_PATH", "model.joblib"))
+        meta_path = Path(os.getenv("META_PATH", "model_meta.json"))
+    
+        if not model_path.exists():
+&gt;           raise RuntimeError(f"Model_PATH not found: {model_path}")
+E           RuntimeError: Model_PATH not found: model.joblib
+
+houseiq-ml\main.py:71: RuntimeError</error></testcase></testsuite></testsuites>
