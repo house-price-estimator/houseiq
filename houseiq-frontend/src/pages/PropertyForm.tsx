@@ -14,6 +14,7 @@ import {
   VStack,
   Heading,
   Text,
+  FormHelperText,
   useToast,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
@@ -80,10 +81,10 @@ const PropertyForm = () => {
       return;
     }
 
-    if (locationIndex < 0 || locationIndex > 99) {
+    if (locationIndex < 0 || locationIndex > 10) {
       toast({
         title: "Validation Error",
-        description: "Location index must be between 0 and 99",
+        description: "Location index must be between 0 and 10",
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -152,6 +153,7 @@ const PropertyForm = () => {
               <FormLabel color="cyan.300" fontWeight="semibold">
                 Bedrooms (1-7)
               </FormLabel>
+              <FormHelperText mb={2} color="cyan.300">Choose between 1 and 7 bedrooms.</FormHelperText>
               <NumberInput
                 min={1}
                 max={7}
@@ -175,6 +177,7 @@ const PropertyForm = () => {
               <FormLabel color="cyan.300" fontWeight="semibold">
                 Bathrooms (1-5)
               </FormLabel>
+              <FormHelperText mb={2} color="cyan.300">Choose between 1 and 5 bathrooms.</FormHelperText>
               <NumberInput
                 min={1}
                 max={5}
@@ -198,6 +201,7 @@ const PropertyForm = () => {
               <FormLabel color="cyan.300" fontWeight="semibold">
                 Floor Area (sqm) (1-1000)
               </FormLabel>
+              <FormHelperText mb={2} color="cyan.300">Enter total floor area in square meters (1 to 1000).</FormHelperText>
               <NumberInput
                 min={1}
                 max={1000}
@@ -222,6 +226,7 @@ const PropertyForm = () => {
               <FormLabel color="cyan.300" fontWeight="semibold">
                 Property Age (years) (0-120)
               </FormLabel>
+              <FormHelperText mb={2} color="cyan.300">Age of the property in years (0 to 120).</FormHelperText>
               <NumberInput
                 min={0}
                 max={120}
@@ -245,6 +250,7 @@ const PropertyForm = () => {
               <FormLabel color="cyan.300" fontWeight="semibold">
                 Location Index (0-10)
               </FormLabel>
+              <FormHelperText mb={2} color="cyan.300">Relative desirability of the area (0 to 10).</FormHelperText>
               <NumberInput
                 min={0}
                 max={10}

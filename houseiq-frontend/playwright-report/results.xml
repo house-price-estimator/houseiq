@@ -1,0 +1,84 @@
+<testsuites id="" name="" tests="2" failures="2" skipped="0" errors="0" time="84.50213900000001">
+<testsuite name="t12-validation.spec.ts" timestamp="2025-11-03T10:54:34.670Z" hostname="chromium" tests="1" failures="1" skipped="0" time="64.504" errors="0">
+<testcase name="T12 UI validation hints and ranges" classname="t12-validation.spec.ts" time="64.504">
+<failure message="t12-validation.spec.ts:3:1 T12 UI validation hints and ranges" type="FAILURE">
+<![CDATA[  [chromium] › t12-validation.spec.ts:3:1 › T12 UI validation hints and ranges ─────────────────────
+
+    Test timeout of 60000ms exceeded.
+
+    Error: page.goto: Target page, context or browser has been closed
+
+       5 |   await page.getByRole('link', { name: /Property/i }).click().catch(() => {
+       6 |     // fallback route
+    >  7 |     return page.goto('/property-form');
+         |                 ^
+       8 |   });
+       9 |
+      10 |   await expect(page.getByText('Bedrooms (1-7)')).toBeVisible();
+        at D:\Projects\houseiq\houseiq-frontend\tests-e2e\t12-validation.spec.ts:7:17
+        at D:\Projects\houseiq\houseiq-frontend\tests-e2e\t12-validation.spec.ts:5:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\t12-validation-T12-UI-validation-hints-and-ranges-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\t12-validation-T12-UI-validation-hints-and-ranges-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\t12-validation-T12-UI-validation-hints-and-ranges-chromium\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\test-results\t12-validation-T12-UI-validation-hints-and-ranges-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|..\test-results\t12-validation-T12-UI-validation-hints-and-ranges-chromium\video.webm]]
+
+[[ATTACHMENT|..\test-results\t12-validation-T12-UI-validation-hints-and-ranges-chromium\error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="t13-e2e-flow.spec.ts" timestamp="2025-11-03T10:54:34.670Z" hostname="chromium" tests="1" failures="1" skipped="0" time="64.4" errors="0">
+<testcase name="T13 UI E2E: login -&gt; form -&gt; submit -&gt; result -&gt; history -&gt; delete" classname="t13-e2e-flow.spec.ts" time="64.4">
+<failure message="t13-e2e-flow.spec.ts:14:1 T13 UI E2E: login -&gt; form -&gt; submit -&gt; result -&gt; history -&gt; delete" type="FAILURE">
+<![CDATA[  [chromium] › t13-e2e-flow.spec.ts:14:1 › T13 UI E2E: login -> form -> submit -> result -> history -> delete 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: page.goto: Target page, context or browser has been closed
+
+      18 |   // Open app and navigate to form
+      19 |   await page.goto('/');
+    > 20 |   await page.getByRole('link', { name: /Property/i }).click().catch(() => page.goto('/property-form'));
+         |                                                                                ^
+      21 |
+      22 |   // Fill fields
+      23 |   await page.getByLabel(/Bedrooms/).fill('3');
+        at D:\Projects\houseiq\houseiq-frontend\tests-e2e\t13-e2e-flow.spec.ts:20:80
+        at D:\Projects\houseiq\houseiq-frontend\tests-e2e\t13-e2e-flow.spec.ts:20:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\t13-e2e-flow-T13-UI-E2E-lo-00d49---result---history---delete-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\t13-e2e-flow-T13-UI-E2E-lo-00d49---result---history---delete-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\t13-e2e-flow-T13-UI-E2E-lo-00d49---result---history---delete-chromium\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\test-results\t13-e2e-flow-T13-UI-E2E-lo-00d49---result---history---delete-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|..\test-results\t13-e2e-flow-T13-UI-E2E-lo-00d49---result---history---delete-chromium\video.webm]]
+
+[[ATTACHMENT|..\test-results\t13-e2e-flow-T13-UI-E2E-lo-00d49---result---history---delete-chromium\error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>
