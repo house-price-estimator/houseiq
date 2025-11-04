@@ -106,28 +106,28 @@ export default function HistoryPage() {
           display="flex"
           alignItems="center"
           justifyContent="center"
-          px="4"
-          py="8"
-          pb="120px"
+          px={{ base: 2, md: 4 }}
+          py={{ base: 4, md: 8 }}
+          pb={{ base: "140px", md: "120px" }}
         >
         <VStack
           bg="rgba(15, 23, 42, 0.9)"
           backdropFilter="blur(10px)"
-          p={10}
+          p={{ base: 4, md: 6, lg: 10 }}
           rounded="2xl"
           shadow="2xl"
           w="full"
-          maxW="700px"
+          maxW={{ base: "95%", md: "600px", lg: "700px" }}
           gap={6}
           align="stretch"
           borderWidth="1px"
           borderColor="cyan.500"
           boxShadow="0 0 30px rgba(6, 182, 212, 0.3)"
         >
-          <Heading size="xl" textAlign="center" color="cyan.400" textShadow="0 0 10px rgba(6, 182, 212, 0.5)">
+          <Heading size={{ base: "lg", md: "xl" }} textAlign="center" color="cyan.400" textShadow="0 0 10px rgba(6, 182, 212, 0.5)">
             Prediction History
           </Heading>
-          <Text textAlign="center" color="cyan.200" fontSize="sm" mb={2}>
+          <Text textAlign="center" color="cyan.200" fontSize={{ base: "xs", md: "sm" }} mb={2}>
             View your past property price predictions
           </Text>
 
@@ -150,7 +150,7 @@ export default function HistoryPage() {
               {predictions.map((prediction) => (
                 <Box
                   key={prediction.id}
-                  p={5}
+                  p={{ base: 3, md: 5 }}
                   borderWidth="1px"
                   borderRadius="lg"
                   borderColor="cyan.800"
@@ -159,33 +159,33 @@ export default function HistoryPage() {
                   transition="all 0.2s"
                   position="relative"
                 >
-                  <VStack align="stretch" gap={3}>
+                  <VStack align="stretch" gap={{ base: 2, md: 3 }}>
                     {/* Predicted Price */}
                     <HStack justifyContent="space-between" flexWrap="wrap">
-                      <Text fontWeight="semibold" color="cyan.300" fontSize="sm">
+                      <Text fontWeight="semibold" color="cyan.300" fontSize={{ base: "xs", md: "sm" }}>
                         Predicted Price
                       </Text>
-                      <Text color="cyan.400" fontWeight="bold" fontSize="xl" textShadow="0 0 10px rgba(6, 182, 212, 0.5)">
+                      <Text color="cyan.400" fontWeight="bold" fontSize={{ base: "lg", md: "xl" }} textShadow="0 0 10px rgba(6, 182, 212, 0.5)">
                         {formatPrice(prediction.predictedPrice)}
                       </Text>
                     </HStack>
 
                     {/* Property Details */}
                     <HStack justifyContent="space-between" flexWrap="wrap">
-                      <Text fontWeight="semibold" color="cyan.300" fontSize="sm">
+                      <Text fontWeight="semibold" color="cyan.300" fontSize={{ base: "xs", md: "sm" }}>
                         Property Details
                       </Text>
-                      <Text color="cyan.200" fontWeight="medium" textAlign="right">
+                      <Text color="cyan.200" fontWeight="medium" textAlign={{ base: "left", md: "right" }} fontSize={{ base: "xs", md: "sm" }}>
                         {formatPropertyDetails(prediction.features || {})}
                       </Text>
                     </HStack>
 
                     {/* Date/Time */}
                     <HStack justifyContent="space-between" flexWrap="wrap">
-                      <Text fontWeight="semibold" color="cyan.300" fontSize="sm">
+                      <Text fontWeight="semibold" color="cyan.300" fontSize={{ base: "xs", md: "sm" }}>
                         Created
                       </Text>
-                      <Text color="cyan.300" fontSize="sm">
+                      <Text color="cyan.300" fontSize={{ base: "xs", md: "sm" }}>
                         {formatDate(prediction.createdAt)}
                       </Text>
                     </HStack>
@@ -193,7 +193,7 @@ export default function HistoryPage() {
                     {/* Explanations */}
                     {prediction.explanations && (
                       <Box>
-                        <Text fontWeight="semibold" color="cyan.300" fontSize="sm" mb={1}>
+                        <Text fontWeight="semibold" color="cyan.300" fontSize={{ base: "xs", md: "sm" }} mb={1}>
                           Top Factors
                         </Text>
                         <VStack align="stretch" spacing={1}>
@@ -201,7 +201,7 @@ export default function HistoryPage() {
                             .sort((a, b) => b[1] - a[1])
                             .slice(0, 3)
                             .map(([k, v]) => (
-                              <Text key={k} color="cyan.200" fontSize="sm">
+                              <Text key={k} color="cyan.200" fontSize={{ base: "xs", md: "sm" }}>
                                 {k.replace(/_/g, " ")}: {(v * 100).toFixed(0)}%
                               </Text>
                             ))}

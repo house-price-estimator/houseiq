@@ -100,7 +100,7 @@ export default function Navbar({ showLogout = true }: NavbarProps) {
   return (
     <Box
       w="100%"
-      px={6}
+      px={{ base: 3, md: 6 }}
       py={4}
       bg="rgba(15, 23, 42, 0.8)"
       backdropFilter="blur(10px)"

@@ -110,23 +110,24 @@ export default function RealEstateTipsFeed() {
       backdropFilter="blur(10px)"
       borderTop="1px solid"
       borderColor="cyan.500"
-      px={6}
-      py={4}
+      px={{ base: 3, md: 6 }}
+      py={{ base: 3, md: 4 }}
       zIndex={100}
       boxShadow="0 -4px 20px rgba(6, 182, 212, 0.3)"
     >
       <HStack
+        direction={{ base: "column", sm: "row" }}
         justify="center"
         align="center"
-        spacing={4}
+        spacing={{ base: 2, sm: 4 }}
         animation={isTransitioning ? `${slideOut} 0.3s ease-out` : `${slideIn} 0.3s ease-in`}
       >
-        <Text fontSize="2xl">{currentTip.icon}</Text>
+        <Text fontSize={{ base: "xl", md: "2xl" }}>{currentTip.icon}</Text>
         <Box flex={1} maxW="800px">
-          <Text fontSize="sm" fontWeight="bold" color="cyan.400" mb={1}>
+          <Text fontSize={{ base: "xs", md: "sm" }} fontWeight="bold" color="cyan.400" mb={1}>
             Did you know?
           </Text>
-          <Text fontSize="sm" color="cyan.200">
+          <Text fontSize={{ base: "xs", md: "sm" }} color="cyan.200">
             <strong>{currentTip.title}:</strong> {currentTip.content}
           </Text>
         </Box>
